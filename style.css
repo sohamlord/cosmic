@@ -1,0 +1,270 @@
+/* ===== RESET & BASE ===== */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --font-display: 'Outfit', sans-serif;
+  --font-mono: 'Space Mono', monospace;
+  --clr-bg: #000007;
+  --clr-accent: #7c6fff;
+  --clr-star: #e8d5ff;
+  --clr-text: rgba(255,255,255,0.9);
+  --clr-muted: rgba(255,255,255,0.45);
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--clr-bg);
+  color: var(--clr-text);
+  font-family: var(--font-display);
+  overflow-x: hidden;
+  /* scroll container is the body */
+}
+
+/* ===== FIXED CANVAS ===== */
+#cosmos-canvas {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw; height: 100vh;
+  z-index: 0;
+  display: block;
+}
+
+/* ===== HUD ===== */
+#hud {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 10;
+  padding: 20px 32px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  pointer-events: none;
+}
+
+#hud-title {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.25em;
+  color: var(--clr-muted);
+  flex-shrink: 0;
+}
+
+#hud-progress-bar {
+  flex: 1;
+  height: 1px;
+  background: rgba(255,255,255,0.1);
+  border-radius: 1px;
+  overflow: hidden;
+}
+
+#hud-progress-fill {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, var(--clr-accent), #c8b8ff);
+  transition: width 0.1s linear;
+  border-radius: 1px;
+}
+
+#hud-year {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.15em;
+  color: var(--clr-muted);
+  flex-shrink: 0;
+  min-width: 120px;
+  text-align: right;
+}
+
+/* ===== SCROLL CONTAINER ===== */
+#scroll-container {
+  position: relative;
+  z-index: 5;
+  pointer-events: none; /* let scroll pass through to body */
+}
+
+/* ===== MILESTONE SECTIONS ===== */
+.milestone {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 80px 8vw;
+  pointer-events: none;
+}
+
+.milestone:nth-child(even) {
+  justify-content: flex-start;
+}
+
+.milestone-content {
+  max-width: 480px;
+  pointer-events: auto;
+  background: linear-gradient(135deg, rgba(15,10,40,0.55), rgba(10,5,25,0.35));
+  border: 1px solid rgba(124,111,255,0.18);
+  border-radius: 20px;
+  padding: 36px 40px;
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  box-shadow: 0 8px 48px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.06);
+  opacity: 0;
+  transform: translateY(40px) scale(0.96);
+  transition: opacity 0.8s cubic-bezier(0.16,1,0.3,1), transform 0.8s cubic-bezier(0.16,1,0.3,1);
+}
+
+.milestone-content.visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+.milestone-label {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.2em;
+  color: var(--clr-accent);
+  margin-bottom: 14px;
+  text-transform: uppercase;
+}
+
+.milestone-title {
+  font-size: clamp(1.6rem, 3.5vw, 2.6rem);
+  font-weight: 800;
+  line-height: 1.15;
+  margin-bottom: 16px;
+  background: linear-gradient(135deg, #fff 40%, var(--clr-accent));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.milestone-desc {
+  font-size: 0.95rem;
+  font-weight: 300;
+  line-height: 1.75;
+  color: var(--clr-muted);
+}
+
+/* ===== PRESENT DAY SPECIAL ===== */
+#section-present .milestone-content {
+  border-color: rgba(255, 200, 100, 0.3);
+  background: linear-gradient(135deg, rgba(30,20,5,0.6), rgba(10,5,25,0.35));
+}
+
+#present-mirror-label {
+  font-size: 3rem;
+  text-align: center;
+  margin-top: 20px;
+  background: linear-gradient(135deg, #ffd700, #ff8c00, #ffd700);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+@keyframes pulse-glow {
+  0%, 100% { opacity: 0.7; }
+  50% { opacity: 1; }
+}
+
+/* ===== INTRO OVERLAY ===== */
+#intro-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  background: radial-gradient(ellipse at center, #0a0520 0%, #000007 70%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  transition: opacity 1s ease, visibility 1s ease;
+}
+
+#intro-overlay.hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+#intro-inner { max-width: 680px; padding: 40px; }
+
+#intro-sub {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.35em;
+  color: var(--clr-accent);
+  margin-bottom: 28px;
+  animation: fadeInUp 1s 0.3s both;
+}
+
+#intro-heading {
+  font-size: clamp(2.8rem, 8vw, 6rem);
+  font-weight: 800;
+  line-height: 1.05;
+  margin-bottom: 24px;
+  animation: fadeInUp 1s 0.5s both;
+}
+
+#intro-heading span {
+  background: linear-gradient(135deg, var(--clr-accent), #c8b8ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+#intro-body {
+  font-size: 1.05rem;
+  font-weight: 300;
+  color: var(--clr-muted);
+  line-height: 1.8;
+  margin-bottom: 48px;
+  animation: fadeInUp 1s 0.7s both;
+}
+
+#scroll-hint {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  animation: fadeInUp 1s 1s both;
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.2em;
+  color: var(--clr-muted);
+}
+
+#scroll-arrow {
+  width: 24px;
+  height: 40px;
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 12px;
+  position: relative;
+}
+
+#scroll-arrow::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 6px;
+  transform: translateX(-50%);
+  width: 4px;
+  height: 8px;
+  background: white;
+  border-radius: 2px;
+  animation: scroll-bounce 1.5s ease-in-out infinite;
+}
+
+@keyframes scroll-bounce {
+  0%, 100% { top: 6px; opacity: 1; }
+  100% { top: 22px; opacity: 0; }
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+  .milestone { justify-content: center !important; padding: 60px 24px; }
+  .milestone-content { padding: 28px 24px; }
+}

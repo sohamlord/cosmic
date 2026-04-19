@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Cosmic Timeline — A Journey Through The Universe</title>
+  <meta name="description" content="An immersive 3D scrolling experience tracing the history of the universe from the Big Bang to the present day." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@200;400;600;800&family=Space+Mono:ital@0;1&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/style.css" />
+</head>
+<body>
+
+  <!-- Fixed WebGL Canvas -->
+  <canvas id="cosmos-canvas"></canvas>
+
+  <!-- HUD Overlays -->
+  <div id="hud">
+    <div id="hud-title">THE COSMIC TIMELINE</div>
+    <div id="hud-progress-bar"><div id="hud-progress-fill"></div></div>
+    <div id="hud-year"></div>
+  </div>
+
+  <!-- Scroll Container — these sections drive GSAP ScrollTrigger -->
+  <div id="scroll-container">
+
+    <section class="milestone" id="section-intro">
+      <div class="milestone-content">
+        <div class="milestone-label">T = 0</div>
+        <h1 class="milestone-title">The Big Bang</h1>
+        <p class="milestone-desc">13.8 billion years ago, everything began from a singularity of infinite density — an explosion that created space, time, matter, and energy itself.</p>
+      </div>
+    </section>
+
+    <section class="milestone" id="section-stars">
+      <div class="milestone-content">
+        <div class="milestone-label">380,000 years later</div>
+        <h2 class="milestone-title">First Stars Ignite</h2>
+        <p class="milestone-desc">The universe cools enough for hydrogen atoms to form. Gravity pulls them together into massive clouds that ignite into the very first stars — blazing beacons in an otherwise dark cosmos.</p>
+      </div>
+    </section>
+
+    <section class="milestone" id="section-solar">
+      <div class="milestone-content">
+        <div class="milestone-label">4.6 billion years ago</div>
+        <h2 class="milestone-title">Our Solar System Forms</h2>
+        <p class="milestone-desc">A nebula collapses under gravity, forming the Sun at its center. Rocky debris and gas coalesce into planets — Mercury, Venus, Earth, Mars, and the giants beyond.</p>
+      </div>
+    </section>
+
+    <section class="milestone" id="section-earth">
+      <div class="milestone-content">
+        <div class="milestone-label">3.8 billion years ago</div>
+        <h2 class="milestone-title">Life on Earth</h2>
+        <p class="milestone-desc">In the ancient oceans, the first self-replicating molecules emerge. Over billions of years, life diversifies — from single cells to the vast tapestry of species that cover our planet today.</p>
+      </div>
+    </section>
+
+    <section class="milestone" id="section-civilization">
+      <div class="milestone-content">
+        <div class="milestone-label">10,000 years ago</div>
+        <h2 class="milestone-title">Human Civilization</h2>
+        <p class="milestone-desc">Humans settle, farm, and build. Cities rise from the dust. Empires emerge, collapse, and leave behind art, architecture, and ideas that echo across millennia.</p>
+      </div>
+    </section>
+
+    <section class="milestone" id="section-internet">
+      <div class="milestone-content">
+        <div class="milestone-label">1969 — present</div>
+        <h2 class="milestone-title">The Internet Age</h2>
+        <p class="milestone-desc">Humanity weaves a global neural network, linking billions of minds. Information flows at the speed of light, and the boundaries between the physical and digital worlds dissolve.</p>
+      </div>
+    </section>
+
+    <section class="milestone" id="section-present">
+      <div class="milestone-content">
+        <div class="milestone-label">Right now</div>
+        <h2 class="milestone-title">You Are Here</h2>
+        <p class="milestone-desc">13.8 billion years of cosmic evolution led to this exact moment. You — a collection of stardust, carbon, and consciousness — reading these words at the edge of all we know.</p>
+        <div id="present-mirror-label">∞</div>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- Intro overlay -->
+  <div id="intro-overlay">
+    <div id="intro-inner">
+      <div id="intro-sub">AN IMMERSIVE JOURNEY</div>
+      <h1 id="intro-heading">THE COSMIC<br/><span>TIMELINE</span></h1>
+      <p id="intro-body">From the Big Bang to the present day.<br/>Scroll to travel through 13.8 billion years of history.</p>
+      <div id="scroll-hint">
+        <div id="scroll-arrow"></div>
+        <span>SCROLL TO BEGIN</span>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>

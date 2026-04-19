@@ -1,0 +1,18 @@
+{
+  "name": "cosmic-timeline",
+  "version": "1.0.0",
+  "description": "An Interactive 3D Scroll Experience through the history of the universe",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "gsap": "^3.12.5",
+    "three": "^0.166.1"
+  },
+  "devDependencies": {
+    "vite": "^5.4.0"
+  }
+}
