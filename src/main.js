@@ -3,6 +3,7 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { SceneManager } from './SceneManager.js';
 import { AnimationController } from './AnimationController.js';
+import { HeroAnimator } from './HeroAnimator.js';
 import { createBigBang } from './milestones/BigBang.js';
 import { createFirstStars } from './milestones/FirstStars.js';
 import { createSolarSystem } from './milestones/SolarSystem.js';
@@ -13,6 +14,11 @@ import { createPresentDay } from './milestones/PresentDay.js';
 
 gsap.registerPlugin(ScrollTrigger);
 
+// --- Hero frame-sequence animator ---
+const heroCanvas = document.getElementById('hero-canvas');
+const heroAnimator = new HeroAnimator(heroCanvas);
+heroAnimator.preload(); // starts playing automatically when first 30 frames are loaded
+
 // --- Intro overlay dismiss ---
 const introOverlay = document.getElementById('intro-overlay');
 let introDismissed = false;
@@ -20,6 +26,8 @@ function dismissIntro() {
   if (introDismissed) return;
   introDismissed = true;
   introOverlay.classList.add('hidden');
+  // Stop the frame animator once the intro is gone (saves memory/GPU)
+  setTimeout(() => heroAnimator.stop(), 1200);
 }
 window.addEventListener('scroll', dismissIntro, { once: true });
 introOverlay.addEventListener('click', dismissIntro);
@@ -70,7 +78,7 @@ ScrollTrigger.create({
 
 // --- Milestone card reveal on scroll ---
 const cards = document.querySelectorAll('.milestone-content');
-cards.forEach((card, i) => {
+cards.forEach((card) => {
   ScrollTrigger.create({
     trigger: card.parentElement,
     start: 'top 70%',

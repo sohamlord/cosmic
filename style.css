@@ -263,6 +263,34 @@ body {
   to   { opacity: 1; transform: translateY(0); }
 }
 
+/* ===== HERO FRAME-SEQUENCE CANVAS ===== */
+#hero-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+}
+
+#hero-vignette {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: radial-gradient(ellipse at center,
+    rgba(0,0,10,0.0) 20%,
+    rgba(0,0,10,0.55) 60%,
+    rgba(0,0,10,0.88) 100%
+  );
+  pointer-events: none;
+}
+
+/* Ensure intro-inner text sits above the canvas */
+#intro-inner {
+  position: relative;
+  z-index: 2;
+}
+
 /* ===== RESPONSIVE ===== */
 @media (max-width: 768px) {
   .milestone { justify-content: center !important; padding: 60px 24px; }
